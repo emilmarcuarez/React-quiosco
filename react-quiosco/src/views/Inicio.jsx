@@ -4,13 +4,13 @@ import useQuiosco from '../hooks/useQuiosco.js'
 
 export default function Inicio() {
 // cualquier funcion que esta en value en QuioscoProvider
-  const { autenticado } =useQuiosco()
+  const { categoriaActual } =useQuiosco()
 
-  console.log(autenticado);
+   
   return (
     <>
     
-      <h1 className='text-4xl font-black'>Inicio</h1>
+      <h1 className='text-4xl font-black'>{categoriaActual.nombre}</h1>
       <p className='text-2xl'>
         Elige y personaliza tu pedido a continuacion
       </p>

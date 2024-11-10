@@ -7,7 +7,7 @@ import Registro from './views/Registro'
 // permite crear las rutas
 const router = createBrowserRouter([
    {
-      // al entrrar / muestra ese componente de layout, siempre en mayuscula la primera letra
+      // al entrar / muestra ese componente de layout, siempre en mayuscula la primera letra
         path: "/",
         element: <Layout />,
         children: [
