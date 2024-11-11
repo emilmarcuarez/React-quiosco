@@ -3,9 +3,10 @@ import useQuiosco from '../hooks/useQuiosco';
 export default function Categoria({ categoria }) {
  
    const {icono, nombre, id} = categoria;
-const { handleClickCategoria, categoriaActual } = useQuiosco();
+    const { handleClickCategoria, categoriaActual } = useQuiosco();
+    const resaltarCategoriaActual = () => categoriaActual.id === id ? 'bg-amber-400' : 'bg-white';
     return (
-    <div className={`${categoriaActual.id === id ? 'bg-amber-400' : 'bg-white' } flex items-center gap-4 border w-full p-3 hover:bg-amber-400 cursor-pointer`}>
+    <div className={`${resaltarCategoriaActual()} flex items-center gap-4 border w-full p-3 hover:bg-amber-400 cursor-pointer`}>
         <img 
         src={`/img/icono_${icono}.svg`}
         alt="imagen icono"
