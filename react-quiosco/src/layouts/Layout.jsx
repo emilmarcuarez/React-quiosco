@@ -17,7 +17,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-
+// quitar error al abrir el modal
 Modal.setAppElement('#root')
 
 export default function Layout() {
