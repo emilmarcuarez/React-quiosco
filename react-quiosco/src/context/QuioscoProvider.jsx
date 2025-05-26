@@ -14,6 +14,7 @@ const QuioscoProvider = ({children}) => {
     //el modal empieza en false porque esta cerrado
     const [modal, setModal] = useState(false);
     const [producto, setProducto] = useState({}); 
+    const [pedido, setPedido] = useState([]); 
 
     const  handleClickCategoria = id => {
         const categoria= categorias.filter(categoria => categoria.id === id)[0]
@@ -28,6 +29,11 @@ const QuioscoProvider = ({children}) => {
     const handleSetProducto = producto =>{
         setProducto(producto)
     }
+// elimina categoria_id e imagen del objeto producto
+    const handleAgregarPedido = ({categoria_id, imagen, ...producto}) => {
+        setPedido([...pedido, producto])
+       // console.log(producto)
+    }
 
     return (
         <QuioscoContext.Provider 
@@ -38,7 +44,9 @@ const QuioscoProvider = ({children}) => {
             modal,
             handleClickModal,
             producto,
-            handleSetProducto
+            handleSetProducto,
+            pedido,
+            handleAgregarPedido
         }}
 
         >{children}</QuioscoContext.Provider>
