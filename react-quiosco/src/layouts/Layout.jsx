@@ -2,6 +2,8 @@
 import { Outlet } from 'react-router-dom'
 
 import Modal from 'react-modal'
+import {ToastContainer} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css"
 import Sidebar from '../components/sidebar'
 import Resumen from '../components/Resumen'
 import useQuiosco from '../hooks/useQuiosco'
@@ -47,6 +49,7 @@ export default function Layout() {
 
         </Modal>
 
+        <ToastContainer />
     </>
   )
 }
