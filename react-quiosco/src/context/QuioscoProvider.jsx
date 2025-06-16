@@ -15,7 +15,7 @@ const QuioscoProvider = ({children}) => {
     const [categorias, setCategorias ] =useState([]) ;
     const [categoriaActual, setCategoriaActual] = useState({});
     //el modal empieza en false porque esta cerrado
-    const [modal, setModal] = useState([]);
+    const [modal, setModal] = useState(false);
     const [producto, setProducto] = useState({}); 
     const [pedido, setPedido] = useState([]); 
     const [total, setTotal] = useState([0]);
