@@ -37,7 +37,7 @@ const [edicion, setEdicion]=useState(false)
             {producto.nombre}
           </h1>
           <p className="mt-5 font-black text-5xl text-amber-500">
-            {formatearDinero(producto.precio)}
+            {/* {formatearDinero(producto.precio)} */}
           </p>
 
           <div className='flex gap-4 mt-5'>

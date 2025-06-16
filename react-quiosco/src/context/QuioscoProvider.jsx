@@ -2,6 +2,8 @@ import { createContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify';
 import { categorias as categoriasDB} from "../data/categorias"
 import PropTypes from 'prop-types';
+//import clienteAxios from '../config/axios'; 
+import axios from 'axios'
 
 
 const QuioscoContext = createContext();
@@ -10,10 +12,10 @@ const QuioscoContext = createContext();
 const QuioscoProvider = ({children}) => {
 
     // primer valor: lo que voy a usar (nombre del state) y lo otro es para modificarlo
-    const [categorias, setCategorias ] =useState(categoriasDB) ;
-    const [categoriaActual, setCategoriaActual] = useState(categorias[0]);
+    const [categorias, setCategorias ] =useState([]) ;
+    const [categoriaActual, setCategoriaActual] = useState({});
     //el modal empieza en false porque esta cerrado
-    const [modal, setModal] = useState(false);
+    const [modal, setModal] = useState([]);
     const [producto, setProducto] = useState({}); 
     const [pedido, setPedido] = useState([]); 
     const [total, setTotal] = useState([0]);
@@ -22,6 +24,22 @@ const QuioscoProvider = ({children}) => {
         const nuevoTotal= pedido.reduce( (total, producto) => (producto.precio*producto.cantidad) + total, 0)
         setTotal(nuevoTotal)
     },[pedido])
+
+    const obtenerCatageorias = async () => {
+        try {
+            // console.log(import.meta.env.VITE_API_URL)
+            const  {data}  = await axios(`${import.meta.env.VITE_API_URL}/api/categorias`);
+            console.log(data.data)
+        setCategorias(data.data)
+        setCategoriaActual(data.data[0]) // establece la primera categoría como la actual
+        } catch (error) {
+            console.error('Error al obtener las categorías:', error);
+        }
+    }
+
+    useEffect(() => {
+        obtenerCatageorias();
+    }, []);
 
     const  handleClickCategoria = id => {
         const categoria= categorias.filter(categoria => categoria.id === id)[0]
@@ -37,7 +55,7 @@ const QuioscoProvider = ({children}) => {
         setProducto(producto)
     }
 // elimina categoria_id  del objeto producto
-    const handleAgregarPedido = ({categoria_id, ...producto}) => {
+    const handleAgregarPedido = ({ ...producto}) => {
       
          if(pedido.some( pedidoState => pedidoState.id === producto.id)){
       const pedidoActualizado= pedido.map(pedidoState => pedidoState.id === producto.id ? producto : pedidoState)
